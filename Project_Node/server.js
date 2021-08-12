@@ -1,39 +1,30 @@
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
-// This responds with "Hello World" on the homepage
+var requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
+
+var input = [
+  {
+    type: 'input',
+    request_quantity: 1,
+    request_type,
+  }
+]
+
+app.use(requestTime)
+
 app.get('/', function (req, res) {
-   console.log("Got a GET request for the homepage");
-   res.send('Hello GET');
+  var responseText = 'Hello World!<br>'
+  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  res.send(responseText)
 })
 
-// This responds a POST request for the homepage
-app.post('/', function (req, res) {
-   console.log("Got a POST request for the homepage");
-   res.send('Hello POST');
-})
+app.route('/Node').get(function(req,res)
+{
+    res.send("Tutorial on Node");
+});
 
-// This responds a DELETE request for the /del_user page.
-app.delete('/del_user', function (req, res) {
-   console.log("Got a DELETE request for /del_user");
-   res.send('Hello DELETE');
-})
-
-// This responds a GET request for the /list_user page.
-app.get('/list_user', function (req, res) {
-   console.log("Got a GET request for /list_user");
-   res.send('Page Listing');
-})
-
-// This responds a GET request for abcd, abxcd, ab123cd, and so on
-app.get('/ab*cd', function(req, res) {   
-   console.log("Got a GET request for /ab*cd");
-   res.send('Page Pattern Match');
-})
-
-var server = app.listen(8081, function () {
-   var host = "127.0.0.1"
-   var port = "8081"
-   
-   console.log("Example app listening at http://%s:%s", host, port)
-})
+app.listen(8081)

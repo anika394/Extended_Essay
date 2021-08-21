@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'monolithic-project
+
+  Sample SAM Template for monolithic-project
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://monolithic-project-arkady394/b71fea080e2e2e88f4ef92ab98d33d0a
+      Handler: app.lambdaHandler
+      Runtime: nodejs14.x
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+  AllEncFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://monolithic-project-arkady394/6b6104a8b8e05f72f6d1daec70d326f0
+      Handler: handler.all_enc
+      Runtime: nodejs14.x
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /all-enc
+            Method: get
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+  HelloWorldFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
+  HelloWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunctionRole
+      - Arn

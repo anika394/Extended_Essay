@@ -23,17 +23,17 @@ exports.all_enc = async(event) => {
         let enc_msg = CryptoJS.AES.encrypt(usr_request.message, aes_key);
         new_msg = enc_msg.toString();
         key = aes_key;
-        returned_msg = "Original Message: " + usr_request.message + " || Encryption Type: " + usr_request.encryption_type + " || Encrypted Message: " + new_msg + " || Key" + key;
+        returned_msg = "Original Message: " + usr_request.message + " || Encryption Type: " + usr_request.encryption_type + " || Encrypted Message: " + new_msg + " || Key: " + key;
     } else if (usr_request.encryption_type === 'DES' && des_key !== null) {
         let enc_msg = CryptoJS.DES.encrypt(usr_request.message, des_key);
         new_msg = enc_msg.toString();
         key = des_key;
-        returned_msg = "Original Message: " + usr_request.message + " || Encryption Type: " + usr_request.encryption_type + " || Encrypted Message: " + new_msg + " || Key" + key;
+        returned_msg = "Original Message: " + usr_request.message + " || Encryption Type: " + usr_request.encryption_type + " || Encrypted Message: " + new_msg + " || Key: " + key;
     } else if (usr_request.encryption_type === 'RSA') {
         let enc_msg = rsa_key.encrypt(usr_request.message, 'base64');
         new_msg = enc_msg.toString();
         key = rsa_key;
-        returned_msg = "Original Message: " + usr_request.message + " || Encryption Type: " + usr_request.encryption_type + " || Encrypted Message: " + new_msg + " || Key" + key.toString();
+        returned_msg = "Original Message: " + usr_request.message + " || Encryption Type: " + usr_request.encryption_type + " || Encrypted Message: " + new_msg;
     } else {
         console.log("did not encrypt");
     }

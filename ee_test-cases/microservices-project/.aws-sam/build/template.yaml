@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: 'monolithic-project
+Description: 'microservices-project
 
-  Sample SAM Template for monolithic-project
+  Sample SAM Template for microservices-project
 
   '
 Globals:
@@ -12,7 +12,7 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://monolithic-project-arkady394/b71fea080e2e2e88f4ef92ab98d33d0a
+      CodeUri: HelloWorldFunction
       Handler: app.lambdaHandler
       Runtime: nodejs14.x
       Events:
@@ -21,17 +21,41 @@ Resources:
           Properties:
             Path: /hello
             Method: get
-  AllEncFunction:
+  AESFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://monolithic-project-arkady394/f69e0d74ff80c56ff8c8bb2630ff82c9
-      Handler: handler.all_enc
+      CodeUri: AESFunction
+      Handler: handler.aes
       Runtime: nodejs14.x
       Events:
-        HelloWorld:
+        AES:
           Type: Api
           Properties:
-            Path: /all-enc
+            Path: /aes
+            Method: get
+  DESFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: DESFunction
+      Handler: handler.des
+      Runtime: nodejs14.x
+      Events:
+        DES:
+          Type: Api
+          Properties:
+            Path: /des
+            Method: get
+  RSAFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: RSAFunction
+      Handler: handler.rsa
+      Runtime: nodejs14.x
+      Events:
+        RSA:
+          Type: Api
+          Properties:
+            Path: /rsa
             Method: get
 Outputs:
   HelloWorldApi:

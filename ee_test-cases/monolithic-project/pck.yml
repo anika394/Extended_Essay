@@ -24,7 +24,7 @@ Resources:
   AllEncFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://monolithic-project-arkady394/f69e0d74ff80c56ff8c8bb2630ff82c9
+      CodeUri: s3://monolithic-project-arkady394/0afcc48d35e77d0d97eefef0b3c60743
       Handler: handler.all_enc
       Runtime: nodejs14.x
       Events:

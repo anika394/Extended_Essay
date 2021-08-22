@@ -1,6 +1,8 @@
 const moment = require('moment');
 const CryptoJS = require("crypto-js");
 const NodeRSA = require('node-rsa');
+const AWS = require('aws-sdk');
+const docClient = new AWS.DynamoDB.DocumentClient({region: 'ap-southeast-1'})
 
 exports.all_enc = async(event) => {
     console.log('all_enc function running')

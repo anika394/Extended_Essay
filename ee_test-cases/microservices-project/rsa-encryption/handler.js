@@ -9,7 +9,7 @@ exports.rsa = async(event) => {
 
     var new_msg;
     
-    var rsa_key = new NodeRSA({b: 512}); //e: 65537;
+    var rsa_key = new NodeRSA({b: 512}); //e: 65537
 
     var returned_msg = "did not encrypt";
 
